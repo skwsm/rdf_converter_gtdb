@@ -1,4 +1,4 @@
-# rdf_converter_gtdb
+# RDF converter for GTDB
 
 
 ## Usage
