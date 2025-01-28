@@ -150,6 +150,22 @@ module GTDB
     end
 
     def self.put_taxonomy_triples
+      root_keys = GTDB.hierarchy.keys
+      if root_keys.size == 1 && root_keys[0] == "d__Bacteria"
+        print ":d__Bacteria\ta\t:Taxon .\n"
+        print ":d__Bacteria\tdct:identifier\t\"d__Bacteria\" .\n"
+        print ":d__Bacteria\trdfs:label\t\"d__Bacteria\" .\n"
+        print ":d__Bacteria\tskos:altLabel\t\"Bacteria\" .\n"
+        print ":d__Bacteria\tddbjtax:rank\t:Domain .\n"
+      elsif root_keys.size == 1 && root_keys[0] == "d__Archaea"
+        print ":d__Archaea\ta\t:Taxon .\n"
+        print ":d__Archaea\tdct:identifier\t\"d__Archaea\" .\n"
+        print ":d__Archaea\trdfs:label\t\"d__Archaea\" .\n"
+        print ":d__Archaea\tskos:altLabel\t\"Archaea\" .\n"
+        print ":d__Archaea\tddbjtax:rank\t:Domain .\n"
+      else
+        STDERR.print "Error: Unknown root!\n"
+      end
       GTDB.hierarchy.each do |root, subtree|
         add_triples(GTDB.triples, root, subtree)
       end
@@ -159,7 +175,7 @@ module GTDB
         print ":#{e[0]}\t#{e[1]}\t:#{e[2]} .\n"
         print ":#{e[0]}\ta\t:Taxon .\n"
         print ":#{e[0]}\tdct:identifier\t\"#{e[0]}\" .\n"
-        print ":#{e[0]}\trdfs:label\t\"#{e[2]}\" .\n"
+        print ":#{e[0]}\trdfs:label\t\"#{e[0]}\" .\n"
         print ":#{e[0]}\tskos:altLabel\t\"#{e[0][3..-1]}\" .\n"
         case e[0][0]
         when "d"
