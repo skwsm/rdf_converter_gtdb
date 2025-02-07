@@ -75,6 +75,8 @@ module GTDB
         print "#{subj}\tddbjtax:rank\t:Strain .\n"
         print "#{subj}\trdfs:seeAlso\tncbigenome:#{ary[0][3..-1]} .\n"
         print "#{subj}\trdfs:seeAlso\tgca:#{ary[0][3..-1]} .\n"
+        print "#{subj}\trdfs:label\t\"#{URI.decode_www_form_component(ary[0])}\" .\n"
+        print "#{subj}\tskos:altLabel\t\"#{URI.decode_www_form_component(ary[0])}\" .\n"
         (1..header.size - 1).each do |i|
           if header[i] == :gtdb_taxonomy
             if GTDB.gtdb_taxonomy.key?(ary[i])
