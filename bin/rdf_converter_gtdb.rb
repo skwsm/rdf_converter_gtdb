@@ -2,6 +2,7 @@
 
 require 'optparse'
 require 'pp'
+require 'uri'
 
 #scaffold N50
 #http://purl.obolibrary.org/obo/OBI_0001945
@@ -175,8 +176,8 @@ module GTDB
         print ":#{e[0]}\t#{e[1]}\t:#{e[2]} .\n"
         print ":#{e[0]}\ta\t:Taxon .\n"
         print ":#{e[0]}\tdct:identifier\t\"#{e[0]}\" .\n"
-        print ":#{e[0]}\trdfs:label\t\"#{e[0]}\" .\n"
-        print ":#{e[0]}\tskos:altLabel\t\"#{e[0][3..-1]}\" .\n"
+        print ":#{e[0]}\trdfs:label\t\"#{URI.decode_www_form_component(e[0])}\" .\n"
+        print ":#{e[0]}\tskos:altLabel\t\"#{URI.decode_www_form_component(e[0][3..-1])}\" .\n"
         case e[0][0]
         when "d"
           print ":#{e[0]}\tddbjtax:rank\t:Domain .\n"
